@@ -13,7 +13,7 @@ const categoryData: Record<string, KidsCategoryItem[]> = {
     { name: 'Sets', image: '/boys/set.png', position: 'center' },
     { name: 'Pants', image: '/boys/pant.png', position: 'center' },
     { name: 'Shorts', image: '/boys/short.png', position: 'center' },
-    { name: 'View All', image: '/assets/texas.jpg', position: '48% center', viewAll: true }
+    { name: 'View All', image: '/assets/boyscat.png', position: 'center', viewAll: true }
   ],
   girls: [
     { name: 'Collar T-Shirts', image: '/girls/gcollart.png', position: 'center' },
@@ -21,7 +21,7 @@ const categoryData: Record<string, KidsCategoryItem[]> = {
     { name: 'Sets', image: '/girls/gset.png', position: 'center' },
     { name: 'Pants', image: '/girls/gpant.png', position: 'center' },
     { name: 'Shorts', image: '/girls/gshorts.png', position: 'center' },
-    { name: 'View All', image: '/assets/Bravo.jpg', position: 'center', viewAll: true }
+    { name: 'View All', image: '/assets/girlscat.png', position: 'center', viewAll: true }
   ]
 };
 
