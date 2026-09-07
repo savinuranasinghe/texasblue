@@ -372,22 +372,35 @@ function VideoHero({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
   );
 }
 
-export function BrandVideo() {
+export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
+  const detectedMobile = useIsMobile();
+  const isMobile = isMobileProp ?? detectedMobile;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
   return (
     <section ref={ref} className="video-banner">
-      <motion.video
-        src="/assets/brand.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="video-hero-bg"
-        style={{ y }}
-      />
+      {isMobile ? (
+        <motion.img
+          key="brand-mobile-img"
+          src="/assets/mobile1.png"
+          alt="A Heritage of Garment Making"
+          className="video-hero-bg"
+          style={{ y }}
+        />
+      ) : (
+        <motion.video
+          key="brand-desktop-video"
+          src="/assets/brand.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="video-hero-bg"
+          style={{ y }}
+        />
+      )}
     </section>
   );
 }
@@ -858,7 +871,7 @@ export default function Home() {
         </>
       )}
       <About />
-      <BrandVideo />
+      <BrandVideo isMobile={isMobile} />
       <Partners />
       <Footer/>
       {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
