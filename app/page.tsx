@@ -144,9 +144,7 @@ export const collections: Product[][] = [
   ], 'TEXAS BLUE', 'Shorts'),
   addMockData([
     { name: 'Women\'s Knit Lounge Set', price: 'Wholesale Price', image: '/assets/bravot1.jpeg', tag: 'Ribbed Knit • Cozy' },
-    { name: 'Men\'s Cotton Chino Trousers', price: 'Wholesale Price', image: '/assets/bravot2.jpeg', tag: 'Stretch Cotton • Smart Fit' },
-    { name: 'Ladies\' Floral Mini Skirt', price: 'Wholesale Price', image: '/assets/passot1.jpeg', tag: 'Viscose • Lightweight' },
-    { name: 'Women\'s Relaxed Linen Blazer', price: 'Wholesale Price', image: '/assets/passot2.jpeg', tag: 'Pure Linen • Premium' }
+    { name: 'Men\'s Cotton Chino Trousers', price: 'Wholesale Price', image: '/assets/bravot2.jpeg', tag: 'Stretch Cotton • Smart Fit' }
   ], 'BRAVO & PASSO', 'Casual & Formal Wear'),
   addMockData([
     { name: 'Ladies\' Wrap Maxi Dress', price: 'Wholesale Price', image: '/assets/alba.jpg', tag: 'Satin Silk • Elegant' },
@@ -379,28 +377,30 @@ export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
+  if (isMobile) {
+    return (
+      <section className="brand-banner-mobile">
+        <img
+          src="/assets/mobile1.png"
+          alt="A Heritage of Garment Making - Texas Blue"
+          className="brand-mobile-poster"
+        />
+      </section>
+    );
+  }
+
   return (
     <section ref={ref} className="video-banner">
-      {isMobile ? (
-        <motion.img
-          key="brand-mobile-img"
-          src="/assets/mobile1.png"
-          alt="A Heritage of Garment Making"
-          className="video-hero-bg"
-          style={{ y }}
-        />
-      ) : (
-        <motion.video
-          key="brand-desktop-video"
-          src="/assets/brand.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="video-hero-bg"
-          style={{ y }}
-        />
-      )}
+      <motion.video
+        key="brand-desktop-video"
+        src="/assets/brand.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="video-hero-bg"
+        style={{ y }}
+      />
     </section>
   );
 }
