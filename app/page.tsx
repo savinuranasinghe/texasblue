@@ -793,7 +793,7 @@ export default function Home() {
           </section>
           <section className="mob-card"><Editorial image="/assets/boyscat.png" title="BOYS" position="center center" href="/kids/boys"/></section>
           <section className="mob-card"><Editorial image="/assets/girlscat.png" title="GIRLS" position="center center" href="/kids/girls"/></section>
-          <section className="feature"><Editorial image="/assets/Huss.jpg" title="INFANT SETS" position="center 35%" href="/brand/infant-sets"/></section>
+          <section className="feature"><Editorial image="/assets/infant.png" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
         </>
       ) : (
         <>
@@ -810,7 +810,7 @@ export default function Home() {
             <Editorial image="/assets/girlscat.png" title="GIRLS" position="center center" href="/kids/girls"/>
             <div className="hero-dots"><i/><i/></div>
           </section>
-          <section className="feature"><Editorial image="/assets/Huss.jpg" title="INFANT SETS" position="center 35%" href="/brand/infant-sets"/></section>
+          <section className="feature"><Editorial image="/assets/infant.png" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
         </>
       )}
       <About />
