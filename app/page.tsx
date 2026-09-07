@@ -82,34 +82,66 @@ const addMockData = (items: RawProduct[], brand: string, category: string): Prod
 export const collections: Product[][] = [
   addMockData([
     { 
-      name: "Boys' Casual Cotton Shorts", 
+      name: "Boys' Casual Chino Shorts", 
       price: 'Wholesale Price', 
-      image: '/boys/boyshortmain.png', 
-      images: ['/boys/boyshortmain.png', '/boys/boyshort2.png', '/boys/boyshort3.jpeg'],
+      image: '/assets/product/boy1.png', 
+      images: ['/assets/product/boy1.png', '/assets/product/boy1close.png'],
       note: 'New', 
       tag: '100% Premium Cotton • Breathable',
       category: 'Shorts',
       categoryHref: '/brand/boys?type=Shorts',
       colors: ['Navy', 'Khaki', 'Black', 'Grey'],
       sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
-      material: '100% Premium Cotton',
+      material: '100% Premium Cotton Twill',
       moq: '50 Pieces per color/style',
-      description: 'Premium boys cotton shorts designed for everyday comfort and style. Made from soft, breathable 100% cotton with an elasticated waistband and durable stitching. Ideal for retail stores looking for fast-selling kids wear.'
+      description: 'Classic boys casual chino shorts crafted from premium breathable cotton twill with an adjustable inner waistband, tailored front pockets, and durable reinforced stitching.'
     },
-    { name: 'Kids\' Character Print T-Shirt', price: 'Wholesale Price', image: '/assets/texast2.jpeg', note: 'New', tag: 'Organic Cotton • Soft Touch' },
     { 
-      name: 'Women\'s Printed T-Shirt', 
+      name: "Boys' Drawstring Terry Shorts", 
       price: 'Wholesale Price', 
-      image: '/assets/husst1.jpeg', 
-      tag: 'Cotton Blend • Moisture Wicking',
-      colorsData: [
-        { name: 'Pink', hex: '#f5daed', images: ['/assets/husst1.jpeg', '/assets/sidev.jpeg', '/assets/backv.jpeg'] },
-        { name: 'Yellow', hex: '#F4E087', images: ['/assets/yellowt.jpeg'] },
-        { name: 'Green', hex: '#98B99A', images: ['/assets/greent.jpeg'] }
-      ]
+      image: '/assets/product/boy2.png', 
+      images: ['/assets/product/boy2.png', '/assets/product/boy2close.png'],
+      note: 'New', 
+      tag: 'Soft French Terry • Everyday Comfort',
+      category: 'Shorts',
+      categoryHref: '/brand/boys?type=Shorts',
+      colors: ['Charcoal', 'Navy', 'Olive', 'Beige'],
+      sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
+      material: '100% Cotton French Terry',
+      moq: '50 Pieces per color/style',
+      description: 'Comfortable pull-on shorts with an elasticated ribbed drawstring waistband. Enzyme-washed for extra softness and relaxed all-day movement.'
     },
-    { name: 'Kids\' Fun Print T-Shirt', price: 'Wholesale Price', image: '/assets/husst2.jpeg', note: 'New', tag: 'Polycotton • Durable' }
-  ], 'TEXAS BLUE & HUSS BEE', 'T-Shirts & Tops'),
+    { 
+      name: "Boys' Utility Cargo Shorts", 
+      price: 'Wholesale Price', 
+      image: '/assets/product/boy3.png', 
+      images: ['/assets/product/boy3.png', '/assets/product/boy3close.png'],
+      note: 'New', 
+      tag: 'Heavy Duty • Reinforced Pockets',
+      category: 'Shorts',
+      categoryHref: '/brand/boys?type=Shorts',
+      colors: ['Khaki', 'Army Green', 'Black', 'Navy'],
+      sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
+      material: '100% Cotton Canvas',
+      moq: '50 Pieces per color/style',
+      description: 'Rugged utility cargo shorts with spacious side flap cargo pockets, secure closures, and durable bar-tacked stress points.'
+    },
+    { 
+      name: "Boys' Everyday Active Shorts", 
+      price: 'Wholesale Price', 
+      image: '/assets/product/boy4.png', 
+      images: ['/assets/product/boy4.png', '/assets/product/boy4close.png'],
+      note: 'New', 
+      tag: 'Lightweight • Quick Dry',
+      category: 'Shorts',
+      categoryHref: '/brand/boys?type=Shorts',
+      colors: ['Blue', 'Grey', 'Red', 'Black'],
+      sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
+      material: 'Cotton Blend Performance Fabric',
+      moq: '50 Pieces per color/style',
+      description: 'Lightweight active summer shorts designed for boys on the move. Breathable cotton blend ensures all-day comfort during sports and outdoor play.'
+    }
+  ], 'TEXAS BLUE', 'Shorts'),
   addMockData([
     { name: 'Women\'s Knit Lounge Set', price: 'Wholesale Price', image: '/assets/bravot1.jpeg', tag: 'Ribbed Knit • Cozy' },
     { name: 'Men\'s Cotton Chino Trousers', price: 'Wholesale Price', image: '/assets/bravot2.jpeg', tag: 'Stretch Cotton • Smart Fit' },
@@ -375,26 +407,32 @@ export function Products({ products, onProductClick, grid = false }: ProductsPro
       className={grid ? 'product-grid' : 'products'}
       aria-label="Featured products"
     >
-      {products.map((p, i) => (
-        <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
-          <a href="#" className="product-image" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-            <img src={p.image} alt={p.name}/>
-            {p.note && <span className="product-note">{p.note}</span>}
-            <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
-            <span className="quick">MORE INFO</span>
-            {p.tag && (
-              <span className="product-insta-tag">
-                <span className="insta-dot"></span>
-                <span className="insta-text">{p.tag}</span>
-              </span>
-            )}
-          </a>
-          <div className="product-info">
-            <a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a>
-            <span>{p.price}</span>
-          </div>
-        </motion.article>
-      ))}
+      {products.map((p, i) => {
+        const hasHover = Boolean(p.images && p.images.length > 1);
+        return (
+          <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
+            <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
+              <img src={p.image} alt={p.name} className="product-primary-img" />
+              {hasHover && (
+                <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+              )}
+              {p.note && <span className="product-note">{p.note}</span>}
+              <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
+              <span className="quick">MORE INFO</span>
+              {p.tag && (
+                <span className="product-insta-tag">
+                  <span className="insta-dot"></span>
+                  <span className="insta-text">{p.tag}</span>
+                </span>
+              )}
+            </a>
+            <div className="product-info">
+              <a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a>
+              <span>{p.price}</span>
+            </div>
+          </motion.article>
+        );
+      })}
     </motion.section>
   );
 }
@@ -437,23 +475,29 @@ export function ArrivalsScroller({ products, onProductClick }: ArrivalsScrollerP
         className="products"
         aria-label="New arrivals products"
       >
-        {products.map((p, i) => (
-          <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
-            <a href="#" className="product-image" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-              <img src={p.image} alt={p.name}/>
-              {p.note && <span className="product-note">{p.note}</span>}
-              <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
-              <span className="quick">MORE INFO</span>
-              {p.tag && (
-                <span className="product-insta-tag">
-                  <span className="insta-dot"></span>
-                  <span className="insta-text">{p.tag}</span>
-                </span>
-              )}
-            </a>
-            <div className="product-info"><a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a><span>{p.price}</span></div>
-          </motion.article>
-        ))}
+        {products.map((p, i) => {
+          const hasHover = Boolean(p.images && p.images.length > 1);
+          return (
+            <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
+              <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
+                <img src={p.image} alt={p.name} className="product-primary-img" />
+                {hasHover && (
+                  <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+                )}
+                {p.note && <span className="product-note">{p.note}</span>}
+                <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
+                <span className="quick">MORE INFO</span>
+                {p.tag && (
+                  <span className="product-insta-tag">
+                    <span className="insta-dot"></span>
+                    <span className="insta-text">{p.tag}</span>
+                  </span>
+                )}
+              </a>
+              <div className="product-info"><a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a><span>{p.price}</span></div>
+            </motion.article>
+          );
+        })}
       </motion.section>
       <div className="arrivals-nav">
         <button
