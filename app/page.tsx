@@ -313,7 +313,9 @@ export function Editorial({ image, title, position = 'center', dark = false, hre
   );
 }
 
-function VideoHero() {
+function VideoHero({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
+  const detectedMobile = useIsMobile();
+  const isMobile = isMobileProp ?? detectedMobile;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
@@ -321,7 +323,8 @@ function VideoHero() {
   return (
     <section ref={ref} className="video-hero">
       <motion.video
-        src="/assets/texashero.mp4"
+        key={isMobile ? 'mobile-hero-video' : 'desktop-hero-video'}
+        src={isMobile ? '/assets/babyheromobile.mp4' : '/assets/texashero.mp4'}
         autoPlay
         loop
         muted
@@ -780,7 +783,7 @@ export default function Home() {
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
       {isMobile ? (
         <>
-          <VideoHero />
+          <VideoHero isMobile={true} />
           <section className="new-arrivals" id="arrivals">
             <h2 style={{ textAlign: 'center', margin: '50px 0 20px', fontSize: '2rem', fontWeight: 300 }}>NEW ARRIVALS</h2>
             <ArrivalsScroller products={[...collections[0], ...collections[1]]} onProductClick={setSelectedProduct} />
@@ -794,7 +797,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          <VideoHero />
+          <VideoHero isMobile={false} />
           <section className="new-arrivals" id="arrivals">
             <h2 style={{ textAlign: 'center', margin: '60px 0 30px', fontSize: '2.5rem', fontWeight: 300 }}>NEW ARRIVALS</h2>
             <ArrivalsScroller products={[...collections[0], ...collections[1]]} onProductClick={setSelectedProduct} />
