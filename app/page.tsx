@@ -840,9 +840,9 @@ export default function Home() {
               <a href="#" className="btn-primary" style={{ display: 'inline-block', padding: '16px 48px', fontSize: '1.1rem', letterSpacing: '0.15em', transition: 'all 0.3s ease', border: '1px solid var(--black)', textDecoration: 'none' }}>DISCOVER MORE</a>
             </div>
           </section>
-          <section className="mob-card"><Editorial image="/assets/boyscat.png" title="BOYS" position="center center" href="/kids/boys"/></section>
-          <section className="mob-card"><Editorial image="/assets/girlscat.png" title="GIRLS" position="center center" href="/kids/girls"/></section>
-          <section className="feature"><Editorial image="/assets/infant.png" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
+          <section className="mob-card"><Editorial image="/boyscard.jpeg" title="BOYS" position="center center" href="/kids/boys"/></section>
+          <section className="mob-card"><Editorial image="/girlscard.jpeg" title="GIRLS" position="center center" href="/kids/girls"/></section>
+          <section className="feature"><Editorial image="/infantcard.jpeg" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
         </>
       ) : (
         <>
@@ -855,11 +855,11 @@ export default function Home() {
             </div>
           </section>
           <section className="hero">
-            <Editorial image="/assets/boyscat.png" title="BOYS" position="center center" href="/kids/boys"/>
-            <Editorial image="/assets/girlscat.png" title="GIRLS" position="center center" href="/kids/girls"/>
+            <Editorial image="/boyscard.jpeg" title="BOYS" position="center center" href="/kids/boys"/>
+            <Editorial image="/girlscard.jpeg" title="GIRLS" position="center center" href="/kids/girls"/>
             <div className="hero-dots"><i/><i/></div>
           </section>
-          <section className="feature"><Editorial image="/assets/infant.png" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
+          <section className="feature"><Editorial image="/infantcard.jpeg" title="INFANT SETS" position="center center" href="/brand/infant-sets"/></section>
         </>
       )}
       <About />
