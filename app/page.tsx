@@ -354,7 +354,7 @@ function VideoHero({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
     <section ref={ref} className="video-hero">
       <motion.video
         key={isMobile ? 'mobile-hero-video' : 'desktop-hero-video'}
-        src={isMobile ? '/assets/babyheromobile.mp4' : '/assets/texashero.mp4'}
+        src={isMobile ? '/assets/babyheromobile.mp4' : '/assets/herov.mp4'}
         autoPlay
         loop
         muted
@@ -373,9 +373,6 @@ function VideoHero({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
 export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
   const detectedMobile = useIsMobile();
   const isMobile = isMobileProp ?? detectedMobile;
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
 
   if (isMobile) {
     return (
@@ -390,16 +387,11 @@ export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = 
   }
 
   return (
-    <section ref={ref} className="video-banner">
-      <motion.video
-        key="brand-desktop-video"
-        src="/assets/brand.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="video-hero-bg"
-        style={{ y }}
+    <section className="brand-banner-desktop">
+      <img
+        src="/assets/herodeck.png"
+        alt="A Heritage of Garment Making - Texas Blue"
+        className="brand-desktop-poster"
       />
     </section>
   );
