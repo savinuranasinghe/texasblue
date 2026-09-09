@@ -11,16 +11,20 @@ const categoryData: Record<string, KidsCategoryItem[]> = {
     { name: 'Collar T-Shirts', image: '/boys/collart.png', position: 'center' },
     { name: 'Round Collar T-Shirts', image: '/boys/roundcollar.png', position: 'center' },
     { name: 'Sets', image: '/boys/set.png', position: 'center' },
-    { name: 'Pants', image: '/boys/pant.png', position: 'center' },
-    { name: 'Shorts', image: '/boys/short.png', position: 'center' },
+    { name: 'Denim Short', image: '/boys/short.png', position: 'center' },
+    { name: 'Twill Short', image: '/boys/short.png', position: 'center' },
+    { name: 'Denim Pants', image: '/boys/pant.png', position: 'center' },
+    { name: 'Twill Pants', image: '/boys/pant.png', position: 'center' },
     { name: 'View All', image: '/assets/boyscat.png', position: 'center', viewAll: true }
   ],
   girls: [
     { name: 'Collar T-Shirts', image: '/girls/gcollart.png', position: 'center' },
     { name: 'Round Collar T-Shirts', image: '/girls/roundcollart.png', position: 'center' },
     { name: 'Sets', image: '/girls/gset.png', position: 'center' },
-    { name: 'Pants', image: '/girls/gpant.png', position: 'center' },
-    { name: 'Shorts', image: '/girls/gshorts.png', position: 'center' },
+    { name: 'Denim Short', image: '/girls/gshorts.png', position: 'center' },
+    { name: 'Twill Short', image: '/girls/gshorts.png', position: 'center' },
+    { name: 'Denim Pants', image: '/girls/gpant.png', position: 'center' },
+    { name: 'Twill Pants', image: '/girls/gpant.png', position: 'center' },
     { name: 'View All', image: '/assets/girlscat.png', position: 'center', viewAll: true }
   ]
 };

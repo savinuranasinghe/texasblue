@@ -172,14 +172,14 @@ const navDropdowns: Record<string, NavDropdownGroup> = {
     label: 'BOYS',
     href: '/kids/boys',
     sections: [
-      { heading: 'SHOP ALL BOYS', href: '/kids/boys', items: ['Collar T-Shirts', 'Round Collar T-Shirts', 'Shorts', 'Pants', 'Sets'] }
+      { heading: 'SHOP ALL BOYS', href: '/kids/boys', items: ['Collar T-Shirts', 'Round Collar T-Shirts', 'Sets', 'Denim Short', 'Twill Short', 'Denim Pants', 'Twill Pants'] }
     ]
   },
   girls: {
     label: 'GIRLS',
     href: '/kids/girls',
     sections: [
-      { heading: 'SHOP ALL GIRLS', href: '/kids/girls', items: ['Collar T-Shirts', 'Round Collar T-Shirts', 'Sets', 'Pants', 'Shorts'] }
+      { heading: 'SHOP ALL GIRLS', href: '/kids/girls', items: ['Collar T-Shirts', 'Round Collar T-Shirts', 'Sets', 'Denim Short', 'Twill Short', 'Denim Pants', 'Twill Pants'] }
     ]
   }
 };
