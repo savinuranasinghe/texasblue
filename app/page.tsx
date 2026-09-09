@@ -86,6 +86,7 @@ export const collections: Product[][] = [
       price: 'Wholesale Price', 
       image: '/product/boyblue.png', 
       images: ['/product/boyblue.png', '/product/boyred.png', '/product/boyyellow.png'],
+      hoverImages: ['/assets/product/blueclose.png', '/assets/product/redclose.png', '/assets/product/yellowclose.png'],
       autoSwap: true,
       note: 'New', 
       tag: '100% Cotton • Variable Colors',
@@ -93,9 +94,9 @@ export const collections: Product[][] = [
       categoryHref: '/brand/boys?type=Round Collar T-Shirts',
       colors: ['Blue', 'Red', 'Yellow'],
       colorsData: [
-        { name: 'Blue', hex: '#23496d', images: ['/product/boyblue.png'] },
-        { name: 'Red', hex: '#b82e38', images: ['/product/boyred.png'] },
-        { name: 'Yellow', hex: '#f4b41a', images: ['/product/boyyellow.png'] }
+        { name: 'Blue', hex: '#23496d', images: ['/product/boyblue.png', '/assets/product/blueclose.png'] },
+        { name: 'Red', hex: '#b82e38', images: ['/product/boyred.png', '/assets/product/redclose.png'] },
+        { name: 'Yellow', hex: '#f4b41a', images: ['/product/boyyellow.png', '/assets/product/yellowclose.png'] }
       ],
       sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
       material: '100% Premium Combed Cotton',
@@ -423,7 +424,17 @@ const productVariants = {
   visible: { opacity: 1, y: 0 }
 };
 
-export function AutoSwapProductImage({ images, alt }: { images: string[]; alt: string }) {
+export function AutoSwapProductImage({ 
+  images, 
+  hoverImages,
+  alt,
+  isHovered = false
+}: { 
+  images: string[]; 
+  hoverImages?: string[]; 
+  alt: string; 
+  isHovered?: boolean;
+}) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -435,27 +446,54 @@ export function AutoSwapProductImage({ images, alt }: { images: string[]; alt: s
   }, [images]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      {images.map((img, idx) => (
-        <img
-          key={img}
-          src={img}
-          alt={`${alt} variant ${idx + 1}`}
-          className="product-primary-img"
-          style={{
-            position: idx === 0 ? 'relative' : 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            mixBlendMode: 'multiply',
-            opacity: currentIndex === idx ? 1 : 0,
-            transition: 'opacity 0.8s ease-in-out, transform 0.55s ease',
-            zIndex: currentIndex === idx ? 2 : 1,
-            pointerEvents: 'none'
-          }}
-        />
-      ))}
+    <div className="product-autoswap-container" style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', zIndex: 1 }}>
+      {images.map((img, idx) => {
+        const hoverImg = hoverImages && hoverImages[idx];
+        const isActive = currentIndex === idx;
+        const showPrimary = isActive && !isHovered;
+        const showHover = isActive && isHovered && Boolean(hoverImg);
+
+        return (
+          <React.Fragment key={img}>
+            <img
+              src={img}
+              alt={`${alt} variant ${idx + 1}`}
+              className="product-primary-img autoswap-img"
+              style={{
+                position: idx === 0 ? 'relative' : 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                mixBlendMode: 'multiply',
+                opacity: showPrimary ? 1 : 0,
+                transition: 'opacity 0.65s ease-in-out, transform 0.55s ease',
+                zIndex: showPrimary ? 2 : 1,
+                pointerEvents: 'none'
+              }}
+            />
+            {hoverImg && (
+              <img
+                src={hoverImg}
+                alt={`${alt} variant ${idx + 1} closeup`}
+                className="autoswap-img"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  mixBlendMode: 'multiply',
+                  opacity: showHover ? 1 : 0,
+                  transition: 'opacity 0.65s ease-in-out, transform 0.55s ease',
+                  zIndex: showHover ? 3 : 1,
+                  pointerEvents: 'none'
+                }}
+              />
+            )}
+          </React.Fragment>
+        );
+      })}
       <div
         style={{
           position: 'absolute',
@@ -485,6 +523,48 @@ export function AutoSwapProductImage({ images, alt }: { images: string[]; alt: s
   );
 }
 
+export function ProductCardItem({ p, onProductClick }: { p: Product; onProductClick: (p: Product) => void }) {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const isAutoSwap = Boolean(p.autoSwap && p.images && p.images.length > 1);
+  const hasHover = !isAutoSwap && Boolean(p.images && p.images.length > 1);
+
+  return (
+    <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={p.name}>
+      <a 
+        href="#" 
+        className={`product-image${hasHover ? ' has-hover-image' : ''}`} 
+        onClick={(e) => { e.preventDefault(); onProductClick(p); }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {isAutoSwap ? (
+          <AutoSwapProductImage images={p.images} hoverImages={p.hoverImages} alt={p.name} isHovered={isHovered} />
+        ) : (
+          <>
+            <img src={p.image} alt={p.name} className="product-primary-img" />
+            {hasHover && (
+              <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+            )}
+          </>
+        )}
+        {p.note && <span className="product-note">{p.note}</span>}
+        <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
+        <span className="quick">MORE INFO</span>
+        {p.tag && (
+          <span className="product-insta-tag" style={{ zIndex: 10, color: '#ffffff' }}>
+            <span className="insta-dot" style={{ background: '#ffffff' }}></span>
+            <span className="insta-text" style={{ color: '#ffffff', fontWeight: 500 }}>{p.tag}</span>
+          </span>
+        )}
+      </a>
+      <div className="product-info">
+        <a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a>
+        <span>{p.price}</span>
+      </div>
+    </motion.article>
+  );
+}
+
 export function Products({ products, onProductClick, grid = false }: ProductsProps) {
   return (
     <motion.section 
@@ -495,39 +575,9 @@ export function Products({ products, onProductClick, grid = false }: ProductsPro
       className={grid ? 'product-grid' : 'products'}
       aria-label="Featured products"
     >
-      {products.map((p, i) => {
-        const isAutoSwap = Boolean(p.autoSwap && p.images && p.images.length > 1);
-        const hasHover = !isAutoSwap && Boolean(p.images && p.images.length > 1);
-        return (
-          <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
-            <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-              {isAutoSwap ? (
-                <AutoSwapProductImage images={p.images} alt={p.name} />
-              ) : (
-                <>
-                  <img src={p.image} alt={p.name} className="product-primary-img" />
-                  {hasHover && (
-                    <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
-                  )}
-                </>
-              )}
-              {p.note && <span className="product-note">{p.note}</span>}
-              <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
-              <span className="quick">MORE INFO</span>
-              {p.tag && (
-                <span className="product-insta-tag">
-                  <span className="insta-dot"></span>
-                  <span className="insta-text">{p.tag}</span>
-                </span>
-              )}
-            </a>
-            <div className="product-info">
-              <a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a>
-              <span>{p.price}</span>
-            </div>
-          </motion.article>
-        );
-      })}
+      {products.map((p, i) => (
+        <ProductCardItem key={`${p.name}-${i}`} p={p} onProductClick={onProductClick} />
+      ))}
     </motion.section>
   );
 }
@@ -570,36 +620,9 @@ export function ArrivalsScroller({ products, onProductClick }: ArrivalsScrollerP
         className="products"
         aria-label="New arrivals products"
       >
-        {products.map((p, i) => {
-          const isAutoSwap = Boolean(p.autoSwap && p.images && p.images.length > 1);
-          const hasHover = !isAutoSwap && Boolean(p.images && p.images.length > 1);
-          return (
-            <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
-              <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-                {isAutoSwap ? (
-                  <AutoSwapProductImage images={p.images} alt={p.name} />
-                ) : (
-                  <>
-                    <img src={p.image} alt={p.name} className="product-primary-img" />
-                    {hasHover && (
-                      <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
-                    )}
-                  </>
-                )}
-                {p.note && <span className="product-note">{p.note}</span>}
-                <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
-                <span className="quick">MORE INFO</span>
-                {p.tag && (
-                  <span className="product-insta-tag">
-                    <span className="insta-dot"></span>
-                    <span className="insta-text">{p.tag}</span>
-                  </span>
-                )}
-              </a>
-              <div className="product-info"><a href="#" onClick={(e) => { e.preventDefault(); onProductClick(p); }}>{p.name}</a><span>{p.price}</span></div>
-            </motion.article>
-          );
-        })}
+        {products.map((p, i) => (
+          <ProductCardItem key={`${p.name}-${i}`} p={p} onProductClick={onProductClick} />
+        ))}
       </motion.section>
       <div className="arrivals-nav">
         <button

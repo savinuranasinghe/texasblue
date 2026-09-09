@@ -24,6 +24,7 @@ export interface RawProduct {
   brand?: string;
   styleCode?: string;
   autoSwap?: boolean;
+  hoverImages?: string[];
 }
 
 export interface Product {
@@ -31,6 +32,7 @@ export interface Product {
   price: string;
   image: string;
   images: string[];
+  hoverImages?: string[];
   note?: string;
   tag?: string;
   category: string;
