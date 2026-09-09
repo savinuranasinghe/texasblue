@@ -23,6 +23,7 @@ export interface RawProduct {
   description?: string;
   brand?: string;
   styleCode?: string;
+  autoSwap?: boolean;
 }
 
 export interface Product {
@@ -42,6 +43,7 @@ export interface Product {
   description: string;
   brand: string;
   styleCode: string;
+  autoSwap?: boolean;
 }
 
 export interface ColorProduct {

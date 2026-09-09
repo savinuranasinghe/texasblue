@@ -82,6 +82,27 @@ const addMockData = (items: RawProduct[], brand: string, category: string): Prod
 export const collections: Product[][] = [
   addMockData([
     { 
+      name: "Boys' Variable Crewneck T-Shirt", 
+      price: 'Wholesale Price', 
+      image: '/product/boyblue.png', 
+      images: ['/product/boyblue.png', '/product/boyred.png', '/product/boyyellow.png'],
+      autoSwap: true,
+      note: 'New', 
+      tag: '100% Cotton • Variable Colors',
+      category: 'Round Collar T-Shirts',
+      categoryHref: '/brand/boys?type=Round Collar T-Shirts',
+      colors: ['Blue', 'Red', 'Yellow'],
+      colorsData: [
+        { name: 'Blue', hex: '#23496d', images: ['/product/boyblue.png'] },
+        { name: 'Red', hex: '#b82e38', images: ['/product/boyred.png'] },
+        { name: 'Yellow', hex: '#f4b41a', images: ['/product/boyyellow.png'] }
+      ],
+      sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
+      material: '100% Premium Combed Cotton',
+      moq: '50 Pieces per color/style',
+      description: "Classic boys' round collar t-shirt crafted from premium 100% combed cotton jersey. Lightweight, breathable, and designed with vibrant color variations, reinforced seams, and rib-knit crew neckline for daily comfort."
+    },
+    { 
       name: "Boys' Casual Chino Shorts", 
       price: 'Wholesale Price', 
       image: '/assets/product/boy1.png', 
@@ -402,6 +423,68 @@ const productVariants = {
   visible: { opacity: 1, y: 0 }
 };
 
+export function AutoSwapProductImage({ images, alt }: { images: string[]; alt: string }) {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [images]);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+      {images.map((img, idx) => (
+        <img
+          key={img}
+          src={img}
+          alt={`${alt} variant ${idx + 1}`}
+          className="product-primary-img"
+          style={{
+            position: idx === 0 ? 'relative' : 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            mixBlendMode: 'multiply',
+            opacity: currentIndex === idx ? 1 : 0,
+            transition: 'opacity 0.8s ease-in-out, transform 0.55s ease',
+            zIndex: currentIndex === idx ? 2 : 1,
+            pointerEvents: 'none'
+          }}
+        />
+      ))}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '8px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: '5px',
+          zIndex: 4,
+          pointerEvents: 'none'
+        }}
+      >
+        {images.map((_, idx) => (
+          <span
+            key={idx}
+            style={{
+              width: currentIndex === idx ? '16px' : '5px',
+              height: '5px',
+              borderRadius: '3px',
+              backgroundColor: currentIndex === idx ? '#111' : 'rgba(0,0,0,0.25)',
+              transition: 'all 0.35s ease'
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Products({ products, onProductClick, grid = false }: ProductsProps) {
   return (
     <motion.section 
@@ -413,13 +496,20 @@ export function Products({ products, onProductClick, grid = false }: ProductsPro
       aria-label="Featured products"
     >
       {products.map((p, i) => {
-        const hasHover = Boolean(p.images && p.images.length > 1);
+        const isAutoSwap = Boolean(p.autoSwap && p.images && p.images.length > 1);
+        const hasHover = !isAutoSwap && Boolean(p.images && p.images.length > 1);
         return (
           <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
             <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-              <img src={p.image} alt={p.name} className="product-primary-img" />
-              {hasHover && (
-                <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+              {isAutoSwap ? (
+                <AutoSwapProductImage images={p.images} alt={p.name} />
+              ) : (
+                <>
+                  <img src={p.image} alt={p.name} className="product-primary-img" />
+                  {hasHover && (
+                    <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+                  )}
+                </>
               )}
               {p.note && <span className="product-note">{p.note}</span>}
               <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
@@ -481,13 +571,20 @@ export function ArrivalsScroller({ products, onProductClick }: ArrivalsScrollerP
         aria-label="New arrivals products"
       >
         {products.map((p, i) => {
-          const hasHover = Boolean(p.images && p.images.length > 1);
+          const isAutoSwap = Boolean(p.autoSwap && p.images && p.images.length > 1);
+          const hasHover = !isAutoSwap && Boolean(p.images && p.images.length > 1);
           return (
             <motion.article variants={productVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="product" key={`${p.name}-${i}`}>
               <a href="#" className={`product-image${hasHover ? ' has-hover-image' : ''}`} onClick={(e) => { e.preventDefault(); onProductClick(p); }}>
-                <img src={p.image} alt={p.name} className="product-primary-img" />
-                {hasHover && (
-                  <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+                {isAutoSwap ? (
+                  <AutoSwapProductImage images={p.images} alt={p.name} />
+                ) : (
+                  <>
+                    <img src={p.image} alt={p.name} className="product-primary-img" />
+                    {hasHover && (
+                      <img src={p.images[1]} alt={`${p.name} closeup`} className="product-hover-img" />
+                    )}
+                  </>
                 )}
                 {p.note && <span className="product-note">{p.note}</span>}
                 <button className="wish" aria-label={`Add ${p.name} to wishlist`}><Icon name="heart"/></button>
