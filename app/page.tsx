@@ -972,7 +972,7 @@ export default function Home() {
         <>
           <VideoHero isMobile={true} />
           <section className="new-arrivals" id="arrivals">
-            <h2 style={{ textAlign: 'center', margin: '50px 0 20px', fontSize: '2rem', fontWeight: 300 }}>NEW ARRIVALS</h2>
+            <h2 style={{ textAlign: 'center', margin: '50px 0 20px', fontSize: '2rem', fontWeight: 600 }}>NEW ARRIVALS</h2>
             <ArrivalsScroller products={[...collections[0], ...collections[1]]} onProductClick={setSelectedProduct} />
             <div style={{ textAlign: 'center', marginBottom: '50px' }}>
               <a href="#" className="btn-primary" style={{ display: 'inline-block', padding: '16px 48px', fontSize: '1.1rem', letterSpacing: '0.15em', transition: 'all 0.3s ease', border: '1px solid var(--black)', textDecoration: 'none' }}>DISCOVER MORE</a>
@@ -986,7 +986,7 @@ export default function Home() {
         <>
           <VideoHero isMobile={false} />
           <section className="new-arrivals" id="arrivals">
-            <h2 style={{ textAlign: 'center', margin: '60px 0 30px', fontSize: '2.5rem', fontWeight: 300 }}>NEW ARRIVALS</h2>
+            <h2 style={{ textAlign: 'center', margin: '60px 0 30px', fontSize: '2.5rem', fontWeight: 600 }}>NEW ARRIVALS</h2>
             <ArrivalsScroller products={[...collections[0], ...collections[1]]} onProductClick={setSelectedProduct} />
             <div style={{ textAlign: 'center', marginBottom: '60px' }}>
               <a href="#" className="btn-primary" style={{ display: 'inline-block', padding: '18px 54px', fontSize: '1.2rem', letterSpacing: '0.15em', transition: 'all 0.3s ease', border: '1px solid var(--black)', textDecoration: 'none' }}>DISCOVER MORE</a>

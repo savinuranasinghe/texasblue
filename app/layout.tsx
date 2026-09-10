@@ -1,8 +1,23 @@
 import type { Metadata } from 'next';
 import React from 'react';
+import { Inter, Montserrat } from 'next/font/google';
 import './globals.css';
 import WhatsAppWidget from './WhatsAppWidget';
 import ScrollToTop from './ScrollToTop';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+  weight: ['400', '500', '600'],
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-heading',
+  weight: ['500', '600'],
+});
 
 export const metadata: Metadata = {
   title: 'TexasBlue.lk | Sri Lanka Wholesale Garment Supplier',
@@ -11,8 +26,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
         <ScrollToTop />
         {children}
         <WhatsAppWidget />
@@ -20,3 +35,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
