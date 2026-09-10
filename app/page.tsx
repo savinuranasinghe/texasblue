@@ -119,19 +119,19 @@ export const collections: Product[][] = [
       description: 'Classic boys casual chino shorts crafted from premium breathable cotton twill with an adjustable inner waistband, tailored front pockets, and durable reinforced stitching.'
     },
     { 
-      name: "Boys' Drawstring Terry Shorts", 
+      name: "Girls' Round Collar T-Shirt", 
       price: 'Wholesale Price', 
-      image: '/assets/product/boy2.png', 
-      images: ['/assets/product/boy2.png', '/assets/product/boy2close.png'],
+      image: '/girl1.png', 
+      images: ['/girl1.png', '/girlclose.png'],
       note: 'New', 
-      tag: 'Soft French Terry • Everyday Comfort',
-      category: 'Shorts',
-      categoryHref: '/brand/boys?type=Shorts',
-      colors: ['Charcoal', 'Navy', 'Olive', 'Beige'],
+      tag: '100% Premium Cotton • Graphic Print',
+      category: 'Round Collar T-Shirts',
+      categoryHref: '/brand/girls?type=Round Collar T-Shirts',
+      colors: ['Pink', 'White', 'Lavender'],
       sizes: ['2-3Y', '4-5Y', '6-7Y', '8-9Y', '10-11Y'],
-      material: '100% Cotton French Terry',
+      material: '100% Premium Combed Cotton',
       moq: '50 Pieces per color/style',
-      description: 'Comfortable pull-on shorts with an elasticated ribbed drawstring waistband. Enzyme-washed for extra softness and relaxed all-day movement.'
+      description: "Classic girls' round collar graphic t-shirt crafted from premium 100% combed cotton jersey. Lightweight, breathable, and designed with vibrant character graphic print and durable reinforced crew neckline for daily comfort."
     },
     { 
       name: "Boys' Utility Cargo Shorts", 

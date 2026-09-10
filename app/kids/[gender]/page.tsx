@@ -18,8 +18,8 @@ const categoryData: Record<string, KidsCategoryItem[]> = {
     { name: 'View All', image: '/assets/boyscat.png', position: 'center', viewAll: true }
   ],
   girls: [
-    { name: 'Collar T-Shirts', image: '/girls/gcollart.png', position: 'center' },
-    { name: 'Round Collar T-Shirts', image: '/girls/roundcollart.png', position: 'center' },
+    { name: 'Collar T-Shirts', image: '/girl2.png', position: 'center' },
+    { name: 'Round Collar T-Shirts', image: '/girlclose.png', position: 'center' },
     { name: 'Sets', image: '/girls/gset.png', position: 'center' },
     { name: 'Denim Short', image: '/girls/gshorts.png', position: 'center' },
     { name: 'Twill Short', image: '/girls/gshorts.png', position: 'center' },
