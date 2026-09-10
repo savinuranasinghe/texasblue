@@ -8,10 +8,10 @@ import type { KidsCategoryItem } from '@/types';
 
 const categoryData: Record<string, KidsCategoryItem[]> = {
   boys: [
-    { name: 'Collar T-Shirts', image: '/boys/collart.png', position: 'center' },
-    { name: 'Round Collar T-Shirts', image: '/boys/roundcollar.png', position: 'center' },
-    { name: 'Sets', image: '/boys/set.png', position: 'center' },
-    { name: 'Denim Short', image: '/boys/short.png', position: 'center' },
+    { name: 'Collar T-Shirts', image: '/collarboy.png', position: 'center' },
+    { name: 'Round Collar T-Shirts', image: '/product/blueclose.png', position: 'center' },
+    { name: 'Sets', image: '/setboy.png', position: 'center' },
+    { name: 'Denim Short', image: '/product/boy2close.png', position: 'center' },
     { name: 'Twill Short', image: '/boys/short.png', position: 'center' },
     { name: 'Denim Pants', image: '/boys/pant.png', position: 'center' },
     { name: 'Twill Pants', image: '/boys/pant.png', position: 'center' },
