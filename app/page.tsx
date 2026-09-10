@@ -368,14 +368,32 @@ export function Editorial({ image, title, position = 'center', dark = false, hre
 function VideoHero({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
   const detectedMobile = useIsMobile();
   const isMobile = isMobileProp ?? detectedMobile;
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
 
   return (
-    <section ref={ref} className="video-hero">
+    <section className="hero-banner">
+      <picture style={{ width: '100%', height: '100%', display: 'block' }}>
+        <source media="(max-width: 900px)" srcSet="/texasbluemobile.png" />
+        <img
+          src={isMobile ? '/texasbluemobile.png' : '/texasbluedesktop.png'}
+          alt="Texas Blue"
+          className="hero-banner-img"
+        />
+      </picture>
+    </section>
+  );
+}
+
+function VideoBanner({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
+  const detectedMobile = useIsMobile();
+  const isMobile = isMobileProp ?? detectedMobile;
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
+
+  return (
+    <section ref={ref} className="video-banner">
       <motion.video
-        key={isMobile ? 'mobile-hero-video' : 'desktop-hero-video'}
+        key={isMobile ? 'mobile-partner-video' : 'desktop-partner-video'}
         src={isMobile ? '/assets/babyheromobile.mp4' : '/assets/herov.mp4'}
         autoPlay
         loop
@@ -985,6 +1003,7 @@ export default function Home() {
       <About />
       <BrandVideo isMobile={isMobile} />
       <Partners />
+      <VideoBanner isMobile={isMobile} />
       <Footer/>
       {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
     </main>
