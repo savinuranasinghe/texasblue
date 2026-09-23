@@ -418,7 +418,7 @@ export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = 
     return (
       <section className="brand-banner-mobile">
         <img
-          src="/assets/mobile1.png"
+          src="/mobileposter.png"
           alt="A Heritage of Garment Making - Texas Blue"
           className="brand-mobile-poster"
         />
@@ -429,7 +429,7 @@ export function BrandVideo({ isMobile: isMobileProp }: { isMobile?: boolean } = 
   return (
     <section className="brand-banner-desktop">
       <img
-        src="/assets/herodeck.png"
+        src="/poster.png"
         alt="A Heritage of Garment Making - Texas Blue"
         className="brand-desktop-poster"
       />
