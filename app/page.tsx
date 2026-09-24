@@ -403,7 +403,7 @@ function VideoBanner({ isMobile: isMobileProp }: { isMobile?: boolean } = {}) {
         style={{ y }}
       />
       <div className="video-hero-content">
-        <img src="/assets/texasLogohero.png" alt="Texas Blue" className="video-hero-logo" />
+        <img src="/texasLogohero.png" alt="Texas Blue" className="video-hero-logo" />
         <p>Style that moves with you</p>
       </div>
     </section>
